@@ -6,7 +6,6 @@ const loadingAi = async () => {
 }
 
 const displayDataItems = (items) => {
-    console.log(items);
     const itemsContainer = document.getElementById("item-container");
 
     items.forEach(item => {
@@ -16,17 +15,22 @@ const displayDataItems = (items) => {
             <div class="card h-100 p-3">
                 <img src="${item.image}" class="card-img-top h-100" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
+                    <h5 class="card-title">Features</h5>
+                    <ol class="list-container">
+                    </ol>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                <div class="d-flex align-items-center px-3">
+                    <div>
+                        <h2>${item.name}</h2>
+                        <p><i class="fa-solid fa-calendar-days"></i></i> ${item.published_in}</p>
+                    </div>
+                    <button class="btn btn-secondary rounded-5 ms-auto"><i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         `
         itemsContainer.appendChild(div)
-        console.log(item);
+
+        // const listContainers = document.getElementsByClassName("list-container");
     });
 }
 
