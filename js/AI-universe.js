@@ -29,7 +29,7 @@ const displayDataItems = (items) => {
                 <div class="d-flex align-items-center px-3">
                     <div>
                         <h2>${item.name}</h2>
-                        <p><i class="fa-solid fa-calendar-days"></i></i> ${item.published_in}</p>
+                        <p><i class="fa-solid fa-calendar-days"></i></i> <span class="published-time">${item.published_in}</span></p>
                     </div>
                     <button onclick="aiDetailsLoading('${item.id}')" type="button" class="btn btn-secondary rounded-5 ms-auto" data-bs-toggle="modal" data-bs-target="#ai-details"><i class="fa-solid fa-arrow-right"></i></button>
                 </div>
@@ -46,7 +46,6 @@ const displayDataItems = (items) => {
             document.getElementById(olId).appendChild(li)
         })
     });
-
     spinnerLoader(false);
 }
 
@@ -60,7 +59,6 @@ const aiDetailsLoading = async (id) => {
 
 //  display single details item with modal
 const aiDetailsDisplay = (details) => {
-    // console.log(details);
     const modal = document.getElementById("modal");
     modal.innerHTML = `
     <div class="modal-header">
@@ -69,16 +67,16 @@ const aiDetailsDisplay = (details) => {
     <div class="row row-cols-1 row-cols-md-2 p-5 g-2">
         <div class="col">
             <div class="card h-100 p-3">
-                <h4>${details.description}</h4>
+                <h4>${details.description ? details.description : "No Description"}</h4>
                 <div class="row row-cols-3 py-3">
                     <div class="col">
-                        <button class="btn btn-danger h-100 w-100 py-3">${details.pricing[0].price} / ${details.pricing[0].plan} </button>
+                        <button class="btn btn-danger h-100 w-100 py-3">${details.pricing ? details.pricing[0].price : 'Free Of cost'} / ${details.pricing ? details.pricing[0].plan : 'No Plan'} </button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-danger h-100 w-100 py-3">${details.pricing[1].price} / ${details.pricing[1].plan}</button>
+                        <button class="btn btn-danger h-100 w-100 py-3">${details.pricing ? details.pricing[1].price : 'Free Of cost'} / ${details.pricing ? details.pricing[1].plan : 'No Plan'}</button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-danger h-100 w-100 py-3">${details.pricing[2].price} / ${details.pricing[2].plan}</button>
+                        <button class="btn btn-danger h-100 w-100 py-3">${details.pricing ? details.pricing[2].price : 'Free Of Cost'} / ${details.pricing ? details.pricing[2].plan : 'No Plan'}</button>
                     </div>
                 </div>
                 <div class="row row-cols-2">
@@ -100,8 +98,8 @@ const aiDetailsDisplay = (details) => {
                     <button id="accuracy" type="button" class="btn btn-danger position-absolute top-0 end-0">${details.accuracy.score * 100}% accuracy</button>
                 </div>
                 <div class="card-body text-center">
-                    <h5 class="card-title">${details.input_output_examples[0]?.input}</h5>
-                    <p>${details.input_output_examples[0].output}</p>
+                    <h5 class="card-title">${details.input_output_examples ? details.input_output_examples[0].input : 'no input'}</h5>
+                    <p>${details.input_output_examples ? details.input_output_examples[0].output : 'No data pond'}</p>
                 </div>
             </div>
         </div>
@@ -127,8 +125,6 @@ const aiDetailsDisplay = (details) => {
 
     // modal integrations list item 
     const modalIntegration = document.getElementById("modal-integration");
-    console.log(modalIntegration);
-
     details.integrations.forEach(integration => {
         const li = document.createElement("li");
         li.innerText = integration;

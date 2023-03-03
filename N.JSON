@@ -1,75 +1,58 @@
 {
     "status": true,
     "data": {
-        "id": "01",
-        "tool_name": "ChatGPT",
-        "description": "ChatGPT is an AI-powered chatbot platform that uses OpenAI's GPT technology to simulate human conversation.",
-        "website": "https://openai.com/",
-        "logo": "https://cdn.openai.com/research-covers/gpt-3-social.jpg",
+        "id": "12",
+        "tool_name": "Facebook AI",
+        "description": "Facebook AI is a collection of tools and technologies developed by Facebook to advance the field of artificial intelligence.",
+        "website": "https://ai.facebook.com/",
+        "logo": "https://example.com/facebook-ai.png",
         "image_link": [
-            "https://www.datanami.com/wp-content/uploads/2023/01/chat_gpt_shutterstock_Ebru-Omer.jpg",
-            "https://img.olhardigital.com.br/wp-content/uploads/2023/01/chatgpt_assistente.jpg"
+            "https://itchronicles.com/wp-content/uploads/2020/09/How-Facebook-uses-Artificial-intelligence-1024x576.jpg"
         ],
-        "input_output_examples": [
-            {
-                "input": "Hi, how are you doing today?",
-                "output": "I'm doing well, thank you for asking. How can I assist you today?"
-            },
-            {
-                "input": "Can you tell me a joke?",
-                "output": "Sure! Why did the tomato turn red? Because it saw the salad dressing!"
-            }
-        ],
+        "input_output_examples": null,
         "features": {
             "1": {
-                "feature_name": "Customizable responses",
-                "description": "ChatGPT can be fine-tuned to produce custom responses based on specific contexts and inputs."
+                "feature_name": "Computer vision",
+                "description": "Facebook AI includes tools for image and video analysis, object detection and recognition, and facial recognition."
             },
             "2": {
-                "feature_name": "Multilingual support",
-                "description": "ChatGPT can handle multiple languages, making it suitable for global use."
+                "feature_name": "Natural language processing",
+                "description": "Facebook AI includes tools for natural language processing, including sentiment analysis, language translation, and text classification."
             },
             "3": {
-                "feature_name": "Seamless integration",
-                "description": "ChatGPT can easily be integrated with other platforms and tools through APIs."
+                "feature_name": "Deep learning",
+                "description": "Facebook AI uses deep learning techniques to train neural networks and develop models for a variety of AI applications."
+            },
+            "4": {
+                "feature_name": "Machine learning",
+                "description": "Facebook AI includes tools for machine learning, including algorithms for predictive modeling, clustering, and anomaly detection."
             }
         },
-        "integrations": [
-            "Facebook Messenger",
-            "Slack",
-            "Telegram"
-        ],
-        "use_cases": [
-            {
-                "name": "Customer Service",
-                "description": "ChatGPT can be used to provide 24/7 customer service and support, answering common questions and resolving issues in a timely manner."
-            },
-            {
-                "name": "Personal Assistant",
-                "description": "ChatGPT can be used as a personal assistant, helping users manage their daily tasks and schedule."
-            },
-            {
-                "name": "E-Commerce",
-                "description": "ChatGPT can be used in e-commerce to provide personalized product recommendations, answer questions about products, and process orders."
-            }
-        ],
-        "pricing": [
-            {
-                "plan": "Basic",
-                "price": "$10/month"
-            },
-            {
-                "plan": "Pro",
-                "price": "$50/month"
-            },
-            {
-                "plan": "Enterprise",
-                "price": "Contact us for pricing"
-            }
-        ],
+        "integrations": null,
+        "use_cases": null,
+        "pricing": null,
         "accuracy": {
-            "score": 0.94,
-            "description": "High accuracy for most natural language processing tasks."
+            "score": null,
+            "description": "Accuracy varies depending on the specific tool or technology being used."
         }
     }
 }
+// // 48 line to start
+// sortByDate();
+// // 151 line fo start
+// // sortByDate 
+// const sortByDate = () => {
+//     document.getElementById("sort-date").addEventListener("click", function () {
+//         const pubTimes = document.getElementsByClassName("published-time");
+//         const oldDate = [];
+//         const arr = Array.from(pubTimes).map(pubTime => {
+//             const pubTimeText = pubTime.innerText;
+//             const date = new Date(pubTimeText);
+//             return (date[Symbol.toPrimitive
+//             ]('number'))
+//             // console.log(date);
+//         })
+//         console.log(arr.sort((a, b) => b - a));
+//     });
+//     document.getElementById("col")
+// }
