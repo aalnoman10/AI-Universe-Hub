@@ -1,11 +1,13 @@
+//  Loading ai item
 const loadingAi = async (countShow) => {
     spinnerLoader(true);
     const URL = "https://openapi.programming-hero.com/api/ai/tools";
     const res = await fetch(URL);
     const data = await res.json();
-    displayDataItems(data.data.tools.slice(0, countShow))
+    displayDataItems(data.data.tools.slice(0, countShow));
 }
 
+//  display ai item
 const displayDataItems = (items) => {
     let countOl = 0;
     const itemsContainer = document.getElementById("item-container");
@@ -38,7 +40,6 @@ const displayDataItems = (items) => {
         // features list item 
         const olId = `features-container${countOl}`;
         item.features.forEach(feature => {
-            console.log(feature);
             const li = document.createElement("li");
             li.innerText = feature;
 
@@ -49,7 +50,7 @@ const displayDataItems = (items) => {
     spinnerLoader(false);
 }
 
-//  details click item  
+//  Loading single details item
 const aiDetailsLoading = async (id) => {
     const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     const res = await fetch(URL);
@@ -57,8 +58,9 @@ const aiDetailsLoading = async (id) => {
     aiDetailsDisplay(data.data)
 }
 
+//  display single details item with modal
 const aiDetailsDisplay = (details) => {
-    console.log(details);
+    // console.log(details);
     const modal = document.getElementById("modal");
     modal.innerHTML = `
     <div class="modal-header">
@@ -82,11 +84,11 @@ const aiDetailsDisplay = (details) => {
                 <div class="row row-cols-2">
                     <div class="col">
                         <h5>Features</h5>
-                        <ul></ul>
+                        <ul id="modal-features"></ul>
                     </div>
                     <div class="col">
                         <h5>Integrations</h5>
-                        <ul></ul>
+                        <ul id="modal-integration"></ul>
                     </div>
                 </div>
             </div>
@@ -102,10 +104,32 @@ const aiDetailsDisplay = (details) => {
         </div>
     </div>
         `
+
+    // modal features list item 
+    const modalFeatures = document.getElementById("modal-features");
+    for (const feature in details.features) {
+        if (Object.hasOwnProperty.call(details.features, feature)) {
+            const element = details.features[feature];
+            const li = document.createElement("li");
+            li.innerText = element.feature_name;
+
+            modalFeatures.appendChild(li)
+        }
+    }
+
+    // modal integrations list item 
+    const modalIntegration = document.getElementById("modal-integration");
+    console.log(modalIntegration);
+
+    details.integrations.forEach(integration => {
+        const li = document.createElement("li");
+        li.innerText = integration;
+        
+        modalIntegration.appendChild(li);
+    })
 }
 
 // spinner Loading 
-
 const spinnerLoader = (condition) => {
     const spinner = document.getElementById("spinner");
     if (condition) {
@@ -116,3 +140,9 @@ const spinnerLoader = (condition) => {
 }
 
 loadingAi(6);
+
+// see more btn 
+document.getElementById("see-more").addEventListener("click", function () {
+    document.getElementById("see-more").classList.add("d-none");
+    loadingAi();
+})
