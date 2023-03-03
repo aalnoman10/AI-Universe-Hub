@@ -1,14 +1,15 @@
-const loadingAi = async () => {
+const loadingAi = async (countShow) => {
     spinnerLoader(true);
     const URL = "https://openapi.programming-hero.com/api/ai/tools";
     const res = await fetch(URL);
     const data = await res.json();
-    displayDataItems(data.data.tools/*slice(0, 6)*/)
+    displayDataItems(data.data.tools.slice(0, countShow))
 }
 
 const displayDataItems = (items) => {
     let countOl = 0;
     const itemsContainer = document.getElementById("item-container");
+    itemsContainer.innerHTML = '';
 
     items.forEach(item => {
         countOl++;
@@ -114,4 +115,4 @@ const spinnerLoader = (condition) => {
     }
 }
 
-loadingAi();
+loadingAi(6);
