@@ -13,16 +13,30 @@
 </head>
 
 <body>
+    <!-- header -->
     <header class="container text-center py-5">
         <h1 class="h1 mb-4">AI Universe Hub</h1>
         <button class="btn btn-danger">Sort By Date</button>
     </header>
+    <!-- main -->
     <main>
+        <!-- ai container -->
         <section class="container">
             <div id="item-container" class="row row-cols-1 row-cols-md-3 g-4">
             </div>
             <div class="py-5 text-center">
                 <button class="btn btn-danger text-center">See More</button>
+            </div>
+        </section>
+        <!-- modal section -->
+        <section class="container">
+            <!-- Modal -->
+            <div class="modal fade" id="ai-details" tabindex="-1" aria-labelledby="ai-detailsLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog modal-xl">
+                    <div id="modal" class="modal-content">
+
+                    </div>
+                </div>
             </div>
         </section>
     </main>
