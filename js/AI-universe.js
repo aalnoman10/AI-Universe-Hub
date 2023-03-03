@@ -2,21 +2,24 @@ const loadingAi = async () => {
     const URL = "https://openapi.programming-hero.com/api/ai/tools";
     const res = await fetch(URL);
     const data = await res.json();
-    displayDataItems(data.data.tools.slice(0, 6))
+    displayDataItems(data.data.tools/*slice(0, 6)*/)
 }
 
 const displayDataItems = (items) => {
+    let countOl = 0;
     const itemsContainer = document.getElementById("item-container");
 
     items.forEach(item => {
+        countOl++;
         const div = document.createElement("div");
         div.classList.add("col");
+
         div.innerHTML = `
             <div class="card h-100 p-3">
                 <img src="${item.image}" class="card-img-top h-100" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Features</h5>
-                    <ol class="list-container">
+                    <ol id="features-container${countOl}">
                     </ol>
                 </div>
                 <div class="d-flex align-items-center px-3">
@@ -28,9 +31,18 @@ const displayDataItems = (items) => {
                 </div>
             </div>
         `
-        itemsContainer.appendChild(div)
 
-        // const listContainers = document.getElementsByClassName("list-container");
+        itemsContainer.appendChild(div)
+        const olId = `features-container${countOl}`;
+
+
+        item.features.forEach(feature => {
+            console.log(feature);
+            const li = document.createElement("li");
+            li.innerText = feature;
+
+            document.getElementById(olId).appendChild(li)
+        })
     });
 }
 
@@ -42,8 +54,8 @@ const aiDetailsLoading = async (id) => {
 }
 
 const aiDetailsDisplay = (details) => {
-    const modal = document.getElementById("modal");
     console.log(details);
+    const modal = document.getElementById("modal");
     modal.innerHTML = `
     <div class="modal-header">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -51,23 +63,25 @@ const aiDetailsDisplay = (details) => {
     <div class="row row-cols-1 row-cols-md-2 p-5 g-2">
         <div class="col">
             <div class="card h-100 p-3">
-                <h3>${details.description}</h3>
-                <div class="row row-cols-3">
+                <h4>${details.description}</h4>
+                <div class="row row-cols-3 py-3">
                     <div class="col">
-                        <button class="btn btn-danger w-100 py-3">${details}</button>
+                        <button class="btn btn-danger h-100 w-100 py-3">${details.pricing[0].price} / ${details.pricing[0].plan} </button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-danger w-100 py-3">${details}</button>
+                        <button class="btn btn-danger h-100 w-100 py-3">${details.pricing[1].price} / ${details.pricing[1].plan}</button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-danger w-100 py-3">${details}</button>
+                        <button class="btn btn-danger h-100 w-100 py-3">${details.pricing[2].price} / ${details.pricing[2].plan}</button>
                     </div>
                 </div>
                 <div class="row row-cols-2">
                     <div class="col">
+                        <h5>Features</h5>
                         <ul></ul>
                     </div>
                     <div class="col">
+                        <h5>Integrations</h5>
                         <ul></ul>
                     </div>
                 </div>
@@ -78,7 +92,7 @@ const aiDetailsDisplay = (details) => {
                 <img src="${details.image_link[0]}" class="card-img-top h-100" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">${details.input_output_examples[0]?.input}</h5>
-                    <p>${details.input_output_examples[0]?.output}</p>
+                    <p>${details.input_output_examples[0].output}</p>
                 </div>
             </div>
         </div>
