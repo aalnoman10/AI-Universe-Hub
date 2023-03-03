@@ -1,4 +1,5 @@
 const loadingAi = async () => {
+    spinnerLoader(true);
     const URL = "https://openapi.programming-hero.com/api/ai/tools";
     const res = await fetch(URL);
     const data = await res.json();
@@ -31,11 +32,10 @@ const displayDataItems = (items) => {
                 </div>
             </div>
         `
-
         itemsContainer.appendChild(div)
+
+        // features list item 
         const olId = `features-container${countOl}`;
-
-
         item.features.forEach(feature => {
             console.log(feature);
             const li = document.createElement("li");
@@ -44,8 +44,11 @@ const displayDataItems = (items) => {
             document.getElementById(olId).appendChild(li)
         })
     });
+
+    spinnerLoader(false);
 }
 
+//  details click item  
 const aiDetailsLoading = async (id) => {
     const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     const res = await fetch(URL);
@@ -98,6 +101,17 @@ const aiDetailsDisplay = (details) => {
         </div>
     </div>
         `
+}
+
+// spinner Loading 
+
+const spinnerLoader = (condition) => {
+    const spinner = document.getElementById("spinner");
+    if (condition) {
+        spinner.classList.remove("d-none")
+    } else {
+        spinner.classList.add("d-none")
+    }
 }
 
 loadingAi();
