@@ -95,7 +95,10 @@ const aiDetailsDisplay = (details) => {
         </div>
         <div class="col">
             <div class="card h-100 p-3">
-                <img src="${details.image_link[0]}" class="card-img-top h-100" alt="...">
+                <div class="position-relative">
+                    <img src="${details.image_link[0]}" class="card-img-top h-100" alt="...">
+                    <button id="accuracy" type="button" class="btn btn-danger position-absolute top-0 end-0">${details.accuracy.score * 100}% accuracy</button>
+                </div>
                 <div class="card-body text-center">
                     <h5 class="card-title">${details.input_output_examples[0]?.input}</h5>
                     <p>${details.input_output_examples[0].output}</p>
@@ -104,6 +107,11 @@ const aiDetailsDisplay = (details) => {
         </div>
     </div>
         `
+
+    // accuracy btn hide for score 0
+    if (details.accuracy.score <= 0) {
+        document.getElementById("accuracy").classList.add("d-none");
+    }
 
     // modal features list item 
     const modalFeatures = document.getElementById("modal-features");
@@ -124,7 +132,7 @@ const aiDetailsDisplay = (details) => {
     details.integrations.forEach(integration => {
         const li = document.createElement("li");
         li.innerText = integration;
-        
+
         modalIntegration.appendChild(li);
     })
 }
