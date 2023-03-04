@@ -8,10 +8,18 @@ const loadingAi = async (countShow) => {
 }
 
 //  display ai item
-const displayDataItems = (items) => {
+const displayDataItems = (items, datePara) => {
     let countOl = 0;
     const itemsContainer = document.getElementById("item-container");
     itemsContainer.innerHTML = '';
+
+    // sort active 
+    // if (datePara) {
+    //     const returnItems = items.map(item => new Date(item.published_in))
+    //     returnItems.slice().sort((a, b) => {
+    //         return b.published_in - a.published_in;
+    //     })
+    // }
 
     items.forEach(item => {
         countOl++;
@@ -26,6 +34,7 @@ const displayDataItems = (items) => {
                     <ol id="features-container${countOl}">
                     </ol>
                 </div>
+                <hr class="mx-3">
                 <div class="d-flex align-items-center px-3">
                     <div>
                         <h2>${item.name}</h2>
@@ -46,6 +55,7 @@ const displayDataItems = (items) => {
             document.getElementById(olId).appendChild(li)
         })
     });
+
     spinnerLoader(false);
 }
 
@@ -61,9 +71,7 @@ const aiDetailsLoading = async (id) => {
 const aiDetailsDisplay = (details) => {
     const modal = document.getElementById("modal");
     modal.innerHTML = `
-    <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
+    <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
     <div class="row row-cols-1 row-cols-md-2 p-5 g-2">
         <div class="col">
             <div class="card h-100 p-3">
@@ -99,7 +107,7 @@ const aiDetailsDisplay = (details) => {
                 </div>
                 <div class="card-body text-center">
                     <h5 class="card-title">${details.input_output_examples ? details.input_output_examples[0].input : 'no input'}</h5>
-                    <p>${details.input_output_examples ? details.input_output_examples[0].output : 'No data pond'}</p>
+                    <p>${details.input_output_examples ? details.input_output_examples[0].output : 'No! Not yet.Take a break'}</p>
                 </div>
             </div>
         </div>
@@ -125,12 +133,15 @@ const aiDetailsDisplay = (details) => {
 
     // modal integrations list item 
     const modalIntegration = document.getElementById("modal-integration");
-    details.integrations.forEach(integration => {
+    details.integrations?.forEach(integration => {
         const li = document.createElement("li");
         li.innerText = integration;
 
         modalIntegration.appendChild(li);
     })
+    if (modalIntegration.innerHTML == '') {
+        modalIntegration.innerHTML = "no data pound";
+    }
 }
 
 // spinner Loading 
@@ -150,3 +161,12 @@ document.getElementById("see-more").addEventListener("click", function () {
     document.getElementById("see-more").classList.add("d-none");
     loadingAi();
 })
+
+// sortByDate 
+const sortByDate = async () => {
+    spinnerLoader(true);
+    const URL = "https://openapi.programming-hero.com/api/ai/tools";
+    const res = await fetch(URL);
+    const data = await res.json();
+    displayDataItems(data.data.tools, true);
+}
